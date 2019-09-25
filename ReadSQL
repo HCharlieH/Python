@@ -1,0 +1,36 @@
+*read_sql_table(table_name, con[, schema, ...])	
+    * Read SQL database table into a DataFrame.
+* read_sql_query(sql, con[, index_col, ...])	
+    * Read SQL query into a DataFrame.
+* read_sql(sql, con[, index_col, ...])	
+    * Read SQL query or database table into a DataFrame.
+* DataFrame.to_sql(name, con[, flavor, ...])	
+    * Write records stored in a DataFrame to a SQL database.
+    
+    
+    
+import pandas as pd
+import sqlalchemy
+from sqlalchemy import create_engine
+
+# 用sqlalchemy构建数据库链接engine
+connect_info = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'
+engine = create_engine(connect_info)
+# sql 命令
+sql_cmd = "SELECT * FROM table"
+df = pd.read_sql(sql=sql_cmd, con=engine)
+
+
+
+import pandas as pd
+import pymysql
+
+# sql 命令
+sql_cmd = "SELECT * FROM table"
+
+# 用DBAPI构建数据库链接engine
+con = pymysql.connect(host=localhost, user=username, password=password, database=dbname, charset='utf8', use_unicode=True)
+df = pd.read_sql(sql_cmd, con)
+————————————————
+版权声明：本文为CSDN博主「Quant_Learner」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/The_Time_Runner/article/details/86601988
